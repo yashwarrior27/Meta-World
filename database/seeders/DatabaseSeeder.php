@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Package;
+use App\Models\Rank;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +16,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $calls=[];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        if(!User::count())
+         User::create([
+        'id'=>1,
+        'register_id'=>'MTW100000',
+        'wallet_address'=>'admin@123#123#456',
+        'parent_id'=>0,
+        'level_str'=>'1',
+        'total_packages'=>100000,
+         ]);
+
+        if(!Package::count())
+           $calls[]=PackageSeeder::class;
+        if(!Rank::count())
+           $calls[]=RankSeeder::class;
+
+       $this->call($calls);
     }
 }
