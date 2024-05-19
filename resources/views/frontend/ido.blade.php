@@ -6,6 +6,8 @@
 <title>Meta World - IDO</title>
 <link href="{{asset('/assets/css/bootstrap.css')}}" rel="stylesheet">
 <link rel='stylesheet' href='{{asset('assets/css/style.css')}}' type='text/css'/>
+<link rel='stylesheet' href='{{asset('assets/css/datatable.css')}}' type='text/css'/>
+<link rel='stylesheet' href='{{asset('assets/css/toastr.css')}}' type='text/css'/>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg">
@@ -46,20 +48,25 @@
 <div class="register-main ido-main">
   <div class="container">
     <div class="ido-outer">
-      <p class="text-center">Wallet Address :-</p>
+      <p class="text-center">Wallet Address :- <span id="wallet-address"></span></p>
       <div class="login-outer ido-form">
         <h2>Buy with USDT</h2>
         <form class="form-inner">
           <div class="form-group">
-            <label class="d-flex align-items-center justify-content-between">USDT Balance <span>00</span></label>
-            <input type="number" name="" placeholder="Enter Amount" class="form-control"/>
+            <label class="d-flex align-items-center justify-content-between">USDT Balance <span id="usdt-bal">0.0000</span></label>
+            <input type="text" id="usdt-amt"    placeholder="Enter Amount" class="form-control" onkeydown="return ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'].includes(event.code) ||
+              ((event.key === '.' && event.target.value.indexOf('.') === -1) ||
+              (!isNaN(Number(event.key)) && event.code !== 'Space' &&
+              !((event.target.value.split('.')[1] || '').length >= 4) &&
+              parseFloat((event.target.value + event.key).replace(/,/g, '')) <= 100000000  &&
+              parseFloat((event.target.value + event.key).replace(/,/g, '')) >= 1))"/>
           </div>
           <div class="form-group">
-            <label class="d-flex align-items-center justify-content-between">META Balance <span>00</span></label>
-            <input type="number" name="" placeholder="Enter Amount" class="form-control"/>
+            <label class="d-flex align-items-center justify-content-between">META Balance <span id="meta-bal">0.0000</span></label>
+            <input type="text"  placeholder="Enter Amount" class="form-control" disabled id="meta-amt"/>
           </div>
           <div class="buy-btn">
-            <button type="submit" class="btn btn-primary w-100">Buy Now</button>
+            <button type="button" id="buy-btn" class="btn btn-primary w-100">Buy Now</button>
           </div>
         </form>
       </div>
@@ -68,6 +75,10 @@
 </div>
 <script src="{{asset('assets/js/jquery.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.js')}}"></script>
+<script src="{{asset('assets/js/datatable.js')}}"></script>
+<script src="{{asset('assets/js/toastr.js')}}"></script>
+<script src="{{asset('assets/js/web3.js')}}"></script>
+<script src="{{asset('assets/js/ido.js?').time()}}"></script>
 <script type="text/javascript">
 $(window).scroll(function(){
   if ($(this).scrollTop() > 80) {
