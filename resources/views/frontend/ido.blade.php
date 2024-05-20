@@ -54,19 +54,20 @@
         <form class="form-inner">
           <div class="form-group">
             <label class="d-flex align-items-center justify-content-between">USDT Balance <span id="usdt-bal">0.0000</span></label>
-            <input type="text" id="usdt-amt"    placeholder="Enter Amount" class="form-control" onkeydown="return ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'].includes(event.code) ||
+            <input type="text" id="usdt-amt"    placeholder="Enter Usdt" class="form-control" onkeydown="return ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'].includes(event.code) ||
               ((event.key === '.' && event.target.value.indexOf('.') === -1) ||
               (!isNaN(Number(event.key)) && event.code !== 'Space' &&
               !((event.target.value.split('.')[1] || '').length >= 4) &&
               parseFloat((event.target.value + event.key).replace(/,/g, '')) <= 100000000  &&
               parseFloat((event.target.value + event.key).replace(/,/g, '')) >= 1))"/>
+              <span id="usdt-err" class="text-danger"></span>
           </div>
           <div class="form-group">
             <label class="d-flex align-items-center justify-content-between">META Balance <span id="meta-bal">0.0000</span></label>
-            <input type="text"  placeholder="Enter Amount" class="form-control" disabled id="meta-amt"/>
+            <input type="text"  placeholder="Meta Token" class="form-control" disabled id="meta-amt"/>
           </div>
           <div class="buy-btn">
-            <button type="button" id="buy-btn" class="btn btn-primary w-100">Buy Now</button>
+            <button type="button" id="buy-btn" class="btn btn-primary w-100" disabled>Buy Now</button>
           </div>
         </form>
       </div>
