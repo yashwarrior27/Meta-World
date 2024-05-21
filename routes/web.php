@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,16 @@ Route::controller(IndexController::class)->group(function(){
 
   Route::get('/','Index');
   Route::get('/login','Login');
+  Route::get('/register/{referral}','Register');
   Route::get('/ido','Ido');
 });
+
+Route::group(['middleware'=>['auth']],function(){
+
+Route::controller(DashboardController::class)->group(function(){
+
+    Route::get('/dashboard','Index');
+});
+
+});
+

@@ -20,6 +20,7 @@ return new class extends Migration
            $table->decimal('total_packages',20,4)->default(0);
            $table->integer('rank_id')->default(0);
            $table->decimal('direct_per',5,2)->default(5);
+           $table->boolean('is_activate')->default(0);
            $table->boolean('status')->default(1);
            $table->timestamps();
            $table->timestamp('deleted_at')->nullable();

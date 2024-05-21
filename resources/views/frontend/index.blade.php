@@ -6,6 +6,8 @@
 <title>Meta World</title>
 <link href="{{asset('/assets/css/bootstrap.css')}}" rel="stylesheet">
 <link rel='stylesheet' href='{{asset('assets/css/style.css')}}' type='text/css'/>
+<link rel="stylesheet" href="{{asset('assets/css/toastr.css')}}">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg">
@@ -216,6 +218,18 @@
 </div>
 <script src="{{asset('assets/js/jquery.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.js')}}"></script>
+<script src="{{asset('assets/js/toastr.js')}}"></script>
+@if (Session::has('success'))
+<script>
+    toastr.success("{{Session::get('success')}}");
+</script>
+@endif
+@if (Session::has('error'))
+<script>
+    toastr.error("{{Session::get('error')}}");
+</script>
+@endif
+
 <script type="text/javascript">
 $(window).scroll(function(){
   if ($(this).scrollTop() > 80) {
