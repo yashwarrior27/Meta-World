@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         try
         {
-           dd('test');
+          return view('dashboard.pages.dashboard.index');
         }
         catch(\Exception $e)
         {

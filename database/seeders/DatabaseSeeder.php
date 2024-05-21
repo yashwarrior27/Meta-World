@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         'parent_id'=>0,
         'level_str'=>'1',
         'total_packages'=>100000,
+        'is_activate'=>1
          ]);
 
         if(!Package::count())
