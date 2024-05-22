@@ -3,7 +3,7 @@
 <script src="{{asset('assets/js/datatable.js')}}"></script>
 <script src="{{asset('assets/js/toastr.js')}}"></script>
 <script src="{{asset('assets/js/web3.js')}}"></script>
-
+<script src="{{asset('assets/js/app.js?').time()}}"></script>
 @if (Session::has('success'))
 <script>
     toastr.success("{{Session::get('success')}}");

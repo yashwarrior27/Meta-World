@@ -13,7 +13,7 @@
             <a class="nav-link {{request()->segment(1)=='dashboard'?'active':''}}" aria-current="page" href="{{url('/dashboard')}}"><img src="{{asset('assets/images/menu-icon1.png')}}" alt="" class="img-fluid" /> Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="stack.html"><img src="{{asset('assets/images/menu-icon2.png')}}" alt="" class="img-fluid" /> Stack</a>
+            <a class="nav-link {{request()->segment(1)=='stake'?'active':''}}" href="{{url('/stake')}}"><img src="{{asset('assets/images/menu-icon2.png')}}" alt="" class="img-fluid" /> Stake</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="stacking.html"><img src="{{asset('assets/images/menu-icon3.png')}}" alt="" class="img-fluid" /> Stacking Report</a>
