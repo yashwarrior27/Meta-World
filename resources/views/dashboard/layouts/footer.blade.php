@@ -23,5 +23,10 @@
         $(".main-right").toggleClass("active");
       });
     });
-    </script>
+</script>
+<script>
+    $(document).ready(function(){
+        $('#myTable').DataTable();
+    });
+</script>
     </html>

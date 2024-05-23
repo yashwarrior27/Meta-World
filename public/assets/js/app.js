@@ -87,8 +87,8 @@ $('.logout').on('click',function(){
        if(Number(check.data.amount)!=Number(val))
        { setTimeout(()=>$('.stake-btn').attr('disabled',false),700); return toastr.error('Amount is invalid.');}
 
-    //    let token=check.data.price*val;
-      let token=val;
+       let token=check.data.price*val;
+    //   let token=val;
 
        let checkAllow= await checkAllowence(walletAddress);
 
@@ -143,8 +143,7 @@ const checkAllowence= async(walletAddress)=>{
  return  await Token.methods.allowance(walletAddress,contract_address)
          .call({from:walletAddress},function (err,res) {
         if(err!=null){
-            console.log(err);
-            // setTimeout(()=>location.reload(),1000);
+            setTimeout(()=>location.reload(),1000);
          return toastr.error('Something went wrong. Please try again later.');
         }
         });
@@ -239,8 +238,8 @@ function copyToClipboard(text) {
     document.body.removeChild(tempInput);
   }
 
-  $('.copy-link').on('click', function (e) {
-    var copyGfGText = document.getElementById("refer_link").innerHTML;
+  $('.copy_code').on('click', function (e) {
+    var copyGfGText = document.getElementById("referral_code").innerHTML;
      (async () => {
     try {
       await copyToClipboard(copyGfGText);
@@ -250,6 +249,18 @@ function copyToClipboard(text) {
     }
     })()
     });
+
+    $('.copy_link').on('click', function (e) {
+        var copyGfGText = document.getElementById("referral_link").innerHTML;
+         (async () => {
+        try {
+          await copyToClipboard(copyGfGText);
+          toastr.success('Link copied to clipboard');
+        } catch (err) {
+          toastr.error('Failed to copy: ', err);
+        }
+        })()
+        });
 // ------------------------------------------------------------------------------------
 
 });

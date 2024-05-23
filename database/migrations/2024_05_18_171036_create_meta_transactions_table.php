@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('transaction_id')->unique();
             $table->string('wallet_address');
             $table->decimal('amount',20,4);
+            $table->decimal('token',20,4);
             $table->enum('status',['pending','rejected','success'])->default('pending');
             $table->text('curl_response')->nullable();
             $table->text('error_response')->nullable();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ReportController;
 use App\Http\Controllers\Dashboard\StakeController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,11 @@ Route::controller(DashboardController::class)->group(function(){
 Route::controller(StakeController::class)->group(function(){
 
     Route::get('/stake','Index');
+});
+
+Route::controller(ReportController::class)->group(function(){
+
+    Route::get('/staking-report','Staking');
 });
 });
 

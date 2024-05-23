@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Package;
 use App\Models\Rank;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -25,7 +26,6 @@ class DatabaseSeeder extends Seeder
         'wallet_address'=>'admin@123#123#456',
         'parent_id'=>0,
         'level_str'=>'1',
-        'total_packages'=>100000,
         'is_activate'=>1
          ]);
 
@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
            $calls[]=PackageSeeder::class;
         if(!Rank::count())
            $calls[]=RankSeeder::class;
+
+        if(!Setting::count())
+           Setting::create(['price'=>2]);
 
        $this->call($calls);
     }

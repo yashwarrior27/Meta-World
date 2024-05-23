@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\MetaTransaction;
 use App\Models\Package;
 use App\Models\PackageUser;
+use App\Models\Setting;
+use App\Models\Transaction;
+use App\Models\User;
+use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,13 +32,12 @@ class CryptoController extends Controller
 
            $check=MetaTransaction::where('user_id',$auth->id)->where('status','pending')->first();
 
-        //    $settings=Setting::first();
+           $settings=Setting::first();
 
-        //    if(!$settings)
-        //       return \ResponseBuilder::fail(trans('messages.SOMETHING'),$this->badRequest);
+           if(!$settings)
+              return \ResponseBuilder::fail(trans('messages.SOMETHING'),$this->badRequest);
 
-        //    $data=['check'=>(bool)$check,'price'=>(float)$settings->price];
-           $data=['check'=>(bool)$check];
+           $data=['check'=>(bool)$check,'price'=>(float)$settings->price];
 
            if(isset($request->package) && !empty($request->package))
              {
@@ -66,13 +69,13 @@ class CryptoController extends Controller
             return \ResponseBuilder::fail($validator->errors()->first(),$this->badRequest);
 
 
-            // $setting=Setting::first();
+            $setting=Setting::first();
 
-            //  if(!$setting)
-            //    return \ResponseBuilder::fail(trans('messages.SOMETHING'),$this->badRequest);
+             if(!$setting)
+               return \ResponseBuilder::fail(trans('messages.SOMETHING'),$this->badRequest);
 
-            // $amount=(float)$request->token/(float)$setting->price;
-            $amount=(float)$request->token;
+            $amount=(float)$request->token/(float)$setting->price;
+            // $amount=(float)$request->token;
 
             $auth=Auth::user();
 
@@ -82,7 +85,7 @@ class CryptoController extends Controller
               'transaction_id'=>$request->transaction_id,
               'wallet_address'=>$auth->wallet_address,
               'amount'=>$amount,
-            //   'token'=>$request->token,
+              'token'=>$request->token,
             ]);
 
             DB::commit();
@@ -132,7 +135,7 @@ class CryptoController extends Controller
           if(true)
           {
 
-             if(PackageUser::where('user_id',$auth->id)->where('meta_trans_id',$metaTrans->id)->first())
+             if(PackageUser::where('user_id',$auth->id)->where('meta_transaction_id',$metaTrans->id)->first())
                 {
                  $metaTrans->status='rejected';
                  $metaTrans->error_response='Already entery exists in transaction.';
@@ -141,36 +144,37 @@ class CryptoController extends Controller
                  return \ResponseBuilder::fail(trans('messages.SOMETHING'),$this->badRequest);
                 }
 
+               $package = Package::findOrFail($metaTrans->package_id);
               $packageUser=  PackageUser::create([
                    'user_id'=>$auth->id,
-                   'meta_trans_id'=>$metaTrans->id,
-                   'package_id'=>$metaTrans->package_id,
+                   'meta_transaction_id'=>$metaTrans->id,
+                   'package_name'=>$package->name,
                    'amount'=>$metaTrans->amount,
+                   'percentage'=>$package->percentage,
+                   'days'=>$package->days,
                 ]);
 
-                $setting=Setting::first();
 
-                if(!$setting)
-                  return \ResponseBuilder::fail(trans('messages.SOMETHING'),$this->badRequest);
+                $parent=User::findOrFail($auth->parent_id);
+                $directIncome=(float)$metaTrans->amount*($parent->direct_per/100);
 
-                  $directIncome=(float)$metaTrans->amount*(env('DirectPer',7)/100);
+                $trans=[];
+                $trans[]=[
+                    'user_id'=>$auth->id,
+                    'amount'=>$metaTrans->amount,
+                    'trans'=>0,
+                    'type_id'=>$packageUser->id,
+                    'type'=>'Package Invest'
+                ];
+                $trans[]= [
+                    'user_id'=>$auth->parent_id,
+                    'amount'=>$directIncome,
+                    'trans'=>1,
+                    'type_id'=>$auth->id,
+                    'type'=>'Direct Income'
+                 ];
 
-                Transaction::insert([[
-                 'user_id'=>$auth->id,
-                 'amount'=>$metaTrans->amount,
-                 'token'=>$metaTrans->token,
-                 'trans'=>0,
-                 'type_id'=>$packageUser->id,
-                 'type'=>'Package Invest'
-                ],
-                ['user_id'=>$auth->parent_id,
-                 'amount'=>$directIncome,
-                 'token'=>(float)$setting->price*$directIncome,
-                 'trans'=>1,
-                 'type_id'=>$auth->id,
-                 'type'=>'Direct Income'
-                ]
-             ]);
+           array_push($trans,...Helper::LevelIncome($auth,$metaTrans->amount,$packageUser->id));
 
              $metaTrans->status='success';
              $metaTrans->curl_response=json_encode($data);
@@ -178,10 +182,12 @@ class CryptoController extends Controller
 
 
              $auth->is_activate=1;
-             $auth->total_package+=$metaTrans->amount;
+             $auth->total_packages+=$metaTrans->amount;
              $auth->total_token+=$metaTrans->token;
              $auth->save();
 
+             Transaction::insert($trans);
+             
              DB::commit();
              return \ResponseBuilder::success(trans('messages.SUCCESS'),$this->success);
          }
@@ -203,8 +209,6 @@ class CryptoController extends Controller
          DB::commit();
          return \ResponseBuilder::fail(trans('messages.FAILED'),$this->badRequest);
         }
-
-
         }
         catch(\Exception $e)
         {

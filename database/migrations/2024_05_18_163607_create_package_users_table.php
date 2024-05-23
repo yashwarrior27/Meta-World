@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('package_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('meta_transaction_id');
             $table->string('package_name');
             $table->decimal('amount',20,4);
             $table->decimal('percentage',5,2)->comment('per_day=percentage/days');

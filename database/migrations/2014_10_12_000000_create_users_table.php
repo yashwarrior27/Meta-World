@@ -17,7 +17,8 @@ return new class extends Migration
            $table->string('wallet_address')->unique();
            $table->unsignedBigInteger('parent_id');
            $table->text('level_str')->nullable();
-           $table->decimal('total_packages',20,4)->default(0);
+           $table->decimal('total_packages',20,4)->default(0)->comment('$');
+           $table->decimal('total_token',20,4)->default(0)->comment('token');
            $table->integer('rank_id')->default(0);
            $table->decimal('direct_per',5,2)->default(5);
            $table->boolean('is_activate')->default(0);

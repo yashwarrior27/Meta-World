@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('transaction_id')->unique();
             $table->string('wallet_address');
             $table->decimal('amount',20,4);
+            $table->decimal('token',20,4);
             $table->decimal('fees',20,4);
             $table->foreignId('trans_id')->nullable()->references('id')->on('transactions')->onDelete('cascade');
             $table->enum('status',['pending','success','rejected'])->default('pending');
