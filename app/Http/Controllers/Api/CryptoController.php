@@ -170,7 +170,7 @@ class CryptoController extends Controller
                     'user_id'=>$auth->parent_id,
                     'amount'=>$directIncome,
                     'trans'=>1,
-                    'type_id'=>$auth->id,
+                    'type_id'=>$packageUser->id,
                     'type'=>'Direct Income'
                  ];
 
@@ -187,7 +187,7 @@ class CryptoController extends Controller
              $auth->save();
 
              Transaction::insert($trans);
-             
+
              DB::commit();
              return \ResponseBuilder::success(trans('messages.SUCCESS'),$this->success);
          }

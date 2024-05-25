@@ -52,7 +52,7 @@
           </div>
           <div class="col-md-3 col-sm-3 col-12">
             <div class="detail-inner income-card">
-              <h4>Stacking</h4>
+              <h4>Staking</h4>
               <h5><small>$</small> {{number_format($authuser?->total_packages??'0',4)}}</h5>
             </div>
           </div>

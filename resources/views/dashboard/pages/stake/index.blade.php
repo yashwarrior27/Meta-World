@@ -17,12 +17,12 @@
         </div>
         <div class="row">
             @foreach ( $value as $item=>$pack)
-            <div class="col-md-4 col-sm-4 col-12">
+            <div class="col-md-4 col-sm-4 col-12 mb-2">
                 <div class="detail-inner income-card {{$css[$c]}}">
 
                   <h3 class="title">{{$pack?->amount??'-'}} <small>$</small></h3>
                   <div class="stack-btn">
-                    <button class="btn btn-primary stake-btn" stake-pack={{$pack?->id}}>Stack Now</button>
+                    <button class="btn btn-primary stake-btn" stake-pack={{$pack?->id}}>Stake Now</button>
                   </div>
                   <input type="hidden" value="{{$pack?->amount}}" id="{{$pack?->id}}-amt">
                 </div>
