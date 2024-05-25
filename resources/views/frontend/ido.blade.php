@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{url('/')}}">
       <img src="{{asset('/assets/images/logo.png')}}" alt="" class="img-fluid"/>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
 <div class="register-main ido-main">
   <div class="container">
     <div class="ido-outer">
-      <p class="text-center">Wallet Address :- <span id="wallet-address"></span></p>
+      {{-- <p class="text-center">Wallet Address :- <span id="wallet-address"></span></p> --}}
       <div class="login-outer ido-form">
         <h2>Buy with USDT</h2>
         <form class="form-inner">
