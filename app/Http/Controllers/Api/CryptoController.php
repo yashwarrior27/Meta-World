@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MetaTransaction;
 use App\Models\Package;
 use App\Models\PackageUser;
+use App\Models\Rank;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
@@ -145,6 +146,22 @@ class CryptoController extends Controller
                 }
 
                $package = Package::findOrFail($metaTrans->package_id);
+
+
+               $auth->is_activate=1;
+               $auth->total_packages+=$metaTrans->amount;
+               $auth->total_token+=$metaTrans->token;
+
+               $checkRank=Rank::where('amount','<=',$auth->total_packages)->where('id','>',$auth->rank_id)->orderBy('id','Desc')->first();
+
+               if($checkRank)
+                 {
+                    $auth->rank_id=$checkRank->id;
+                    $auth->rank_status=0;
+                 }
+
+               $auth->save();
+
               $packageUser=  PackageUser::create([
                    'user_id'=>$auth->id,
                    'meta_transaction_id'=>$metaTrans->id,
@@ -156,6 +173,20 @@ class CryptoController extends Controller
 
 
                 $parent=User::findOrFail($auth->parent_id);
+
+                if($parent->rank_id>0 && $parent->rank_status==0)
+                {
+                    $parentRank=Rank::findOrFail($parent->rank_id);
+                    $directRankCount=User::where('parent_id',$parent->id)->where('rank_id','>=',$parent->rank_id)->where('is_activate',1)->count();
+                    if($parentRank->directs<=$directRankCount)
+                    {
+                        $parent->rank_status=1;
+                        $parent->direct_per=$parentRank->reward_per;
+                        $parent->save();
+                    }
+                }
+
+
                 $directIncome=(float)$metaTrans->amount*($parent->direct_per/100);
 
                 $trans=[];
@@ -179,12 +210,6 @@ class CryptoController extends Controller
              $metaTrans->status='success';
              $metaTrans->curl_response=json_encode($data);
              $metaTrans->save();
-
-
-             $auth->is_activate=1;
-             $auth->total_packages+=$metaTrans->amount;
-             $auth->total_token+=$metaTrans->token;
-             $auth->save();
 
              Transaction::insert($trans);
 

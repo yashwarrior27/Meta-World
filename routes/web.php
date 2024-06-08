@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ReportController;
 use App\Http\Controllers\Dashboard\StakeController;
 use App\Http\Controllers\IndexController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,17 @@ Route::controller(ReportController::class)->group(function(){
     Route::get('/roi-income','RoiIncome');
 });
 });
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+
+    return "cache is clear";
+});
+
+Route::get('/roi-cron',function(){
+    Artisan::call('roi-cron');
+});
+
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('amount',20,4);
+            $table->integer('directs')->default(0);
             $table->decimal('reward_per',5,2)->comment('increase direct-income percentage');
             $table->boolean('status')->default(1);
             $table->timestamps();
