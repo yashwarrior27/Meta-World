@@ -24,13 +24,13 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Tokonomics</a>
+          <a class="nav-link" href="#token">Tokonomics</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Roadmap</a>
+          <a class="nav-link" href="#roadmap">Roadmap</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contract</a>
@@ -52,7 +52,7 @@
           <div class="banner-left">
             <h1>Meta World <span>And Precious Metals Investment</span></h1>
             <div class="ico-meter">
-              <p><b>Meter ICO From 1 Jan to 31 May</b></p>
+              <p><b>Meter IDO From 10 June</b></p>
               <div id="countdown">
                 <ul>
                   <li><span id="days"></span>days</li>
@@ -64,7 +64,7 @@
             </div>
             <div class="banner-btns">
               <a href="{{url('/ido')}}" class="btn btn-primary">Buy Now</a>
-              <a href="javascript:void(0)" class="btn btn-primary">WhitePappers</a>
+              <a href="{{asset('assets/metacoin_whitepaper_en.pdf')}}" target="_blank" class="btn btn-primary">WhitePappers</a>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
         </div>
         <div class="col-md-7 col-12">
           <div class="about-right">
-            <h3 class="title">About <span class="brand-name">Meta World</span></h3>
+            <h3 class="title" id="about">About <span class="brand-name">Meta World</span></h3>
             <p>Our mission is to leverage the power of the Meta World Coin through a protocol trusted with billions for its performance and reliability. We believe in empowering you to take full control of your portfolio.</p>
             <p>At N1, we are passionate about fostering the growth of the crypto community and the adoption of Meta World coin. As the world witnesses a surge in crypto adoption, we believe in the importance of increasing liquidity to match. We are not a financial service provider, nor do we sell financial products or make lucrative offers. Instead, we are a dedicated platform where users can participate, engage, and earn rewards in the form of Meta World coins. Our mission is to build a thriving community that supports the Meta World coin ecosystem, empowering users to take control of their digital assets and be a part of the future of finance. Join us on this exciting journey!</p>
             <p>Join us at N1 and take full advantage of what Nordek has to offer!</p>
@@ -219,7 +219,7 @@
   <div class="tokenomics-main">
     <div class="container">
       <div class="section-heading text-center">
-        <h3 class="title"><span class="brand-name">Meta</span> Tokenomics</h3>
+        <h3 class="title" id="token"><span class="brand-name">Meta</span> Tokenomics</h3>
       </div>
       <div class="tokenomics-outer">
         <div class="row align-items-center">
@@ -277,7 +277,7 @@
   <div class="roadmap-main">
     <div class="container">
       <div class="section-heading text-center">
-        <h3 class="title">Roadmap</h3>
+        <h3 class="title" id='roadmap'>Roadmap</h3>
       </div>
       <div class="roadmap-outer">
         <div class="row justify-content-center">
@@ -287,8 +287,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>June 2024</h4>
+                <p>IDO</p>
               </div>
             </div>
           </div>
@@ -298,8 +298,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>SEP 2024</h4>
+                <p>Pan Cake Swap Listing</p>
               </div>
             </div>
           </div>
@@ -309,8 +309,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>Dec 2024</h4>
+                <p>Coin Market Cap Listing</p>
               </div>
             </div>
           </div>
@@ -320,8 +320,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>March 2025</h4>
+                <p>Meta Wallet</p>
               </div>
             </div>
           </div>
@@ -331,8 +331,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>June 2025</h4>
+                <p>Meta Exchange</p>
               </div>
             </div>
           </div>
@@ -342,8 +342,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>SEP 2025</h4>
+                <p>Meta NFT</p>
               </div>
             </div>
           </div>
@@ -353,8 +353,8 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>Dec 2025</h4>
+                <p>Burning Event</p>
               </div>
             </div>
           </div>
@@ -364,8 +364,19 @@
                 <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
               </div>
               <div class="content-outer position-absolute">
-                <h4>April 2024</h4>
-                <p>Start of the Meta World Token.</p>
+                <h4>March 2026</h4>
+                <p>Meta Gaming</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12  more-space">
+            <div class="roadmap-inner text-center position-relative">
+              <div class="img-outer">
+                <img src="{{asset('/assets/images/roadmap-img1.png')}}" alt="" class="img-fluid"/>
+              </div>
+              <div class="content-outer position-absolute">
+                <h4>Dec 2026</h4>
+                <p>500+ Online Shopping Portal with MT Coin</p>
               </div>
             </div>
           </div>
@@ -441,8 +452,10 @@
     <div class="container">
       <div class="contract-outer text-center">
         <h3 class="title"><span class="brand-name">Meta World</span> CONTRACT</h3>
-        <h4>Binance Smart Chain</h4>
-        <p id="address">0x1E7427d132dC6b19f8EF53d9b2dD3030A3f679AE</p>
+        <h4>Polygon Chain</h4>
+        <p class="py-2 m-0">Total Supply : <b>1,90,00,00,000</b></p>
+        <p class="py-2 m-0">Decimal : <b>18</b></p>
+        <p ><b id="address">0x1E7427d132dC6b19f8EF53d9b2dD3030A3f679AE</b></p>
         <div class="copy-btn">
           <button class="btn btn-primary copy_address">Copy</button>
         </div>
@@ -546,7 +559,7 @@ $(window).scroll(function(){
       mm = String(today.getMonth() + 1).padStart(2, "0"),
       yyyy = today.getFullYear(),
       nextYear = yyyy + 1,
-      dayMonth = "05/31/",
+      dayMonth = "06/10/",
       birthday = dayMonth + yyyy;
   today = mm + "/" + dd + "/" + yyyy;
   if (today > birthday) {
